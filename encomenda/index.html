@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>M&gourmet | Confeitaria Artesanal</title>
+    <!-- Google Fonts para tipografia elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #2A1A0E;
+            color: #F5E6D3;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --brown-deep: #2E1B0F;
+            --brown-rich: #4A2C1A;
+            --brown-warm: #6B3E26;
+            --brown-caramel: #9B6A46;
+            --brown-cream: #D9C2A7;
+            --brown-gold: #C9A87C;
+            --brown-light: #F3E9DC;
+            --shadow-dark: 0 20px 30px -12px rgba(0,0,0,0.4);
+            --shadow-soft: 0 10px 20px -5px rgba(0,0,0,0.2);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #3A2418;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9B6A46;
+            border-radius: 10px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(46, 27, 15, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(201, 168, 124, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #E4C9A7, #C2976B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--brown-cream);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links a:hover {
+            color: #F2D9B0;
+            transform: translateY(-2px);
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            color: var(--brown-cream);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: #C2834B;
+            color: #2E1B0F;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(107deg, #2A1A0E 0%, #4A2C1A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {   
+            font-size: 22rem;
+            opacity: 0.04;
+            position: absolute;
+            bottom: -80px;
+            right: -40px;
+            pointer-events: none;
+            transform: rotate(10deg);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #F6E5CE;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            color: #EADABC;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #B47C48;
+            color: #26190E;
+            padding: 0.9rem 2.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            background: #D6A16E;
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            color: #1F1309;
+        }
+
+        .products-section {
+            padding: 5rem 2rem;
+            background: #2F1D12;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #EAD0AE;
+            border-bottom: 2px dashed #8B5A3A;
+            display: inline-block;
+            width: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .title-wrapper {
+            text-align: center;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: #3D281B;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid #66462E;
+            backdrop-filter: blur(2px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-dark);
+            border-color: #B58556;
+        }
+
+        .product-img {
+            height: 290px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 1rem;
+        }
+
+        .badge {
+            background: rgba(89, 52, 28, 0.85);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #F7E9D7;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #F1DDBF;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #DCAF7C;
+            margin: 0.6rem 0;
+        }
+
+        .add-to-cart {
+            background: #684C33;
+            border: none;
+            color: #FDF2E3;
+            padding: 0.7rem 0;
+            width: 100%;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: default;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .add-to-cart:hover {
+            background: #8C6242;
+            color: white;
+        }
+
+        .testimonials {
+            background: #372414;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .carousel {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #4F3322;
+            padding: 2rem;
+            border-radius: 48px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #F3E1CA;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #C9A073;
+        }
+
+        .carousel-controls {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .carousel-btn {
+            background: #69492E;
+            border: none;
+            color: #FFE7CF;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: default;
+            transition: 0.2s;
+        }
+
+        .carousel-btn:hover {
+            background: #9B6F4B;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 420px;
+            max-width: 90vw;
+            height: 100%;
+            background: #2C1C12;
+            box-shadow: -8px 0 30px rgba(0,0,0,0.5);
+            z-index: 1100;
+            transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            border-left: 2px solid #AA7A4D;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #6A4D32;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-header h2 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: default;
+            color: #DABF9B;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #3F2A1C;
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 20px;
+        }
+
+        .cart-item-info p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .cart-item-price {
+            color: #E1BC8B;
+        }
+
+        .remove-item {
+            background: #5F3D28;
+            border: none;
+            color: #FAD5A5;
+            border-radius: 30px;
+            padding: 4px 10px;
+            cursor: default;
+        }
+
+        .cart-total {
+            font-size: 1.4rem;
+            font-weight: bold;
+            border-top: 2px solid #7A563A;
+            padding-top: 1rem;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .checkout-btn {
+            background: #B6814B;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 60px;
+            font-weight: bold;
+            color: #24180E;
+            font-size: 1.1rem;
+            cursor: default;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(3px);
+            z-index: 1050;
+            display: none;
+        }
+
+        .overlay.active {
+            display: none;
+        }
+
+        footer {
+            background: #1E130A;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #B39373;
+        }
+
+        @media (max-width: 780px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 520px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Garantir que sidebar não abra sem JS — permanece oculta */
+        #cartSidebar {
+            right: -450px !important;
+        }
+        .overlay {
+            display: none !important;
+        }
+
+        
+
+        h3 {
+            background-color: #8C6242;
+            margin: -24px;
+            
+            text-align: center;
+            
+        }
+
+        div.price {
+            padding-bottom: 10px;
+        }
+
+        img {
+            max-width: 40px;
+            max-height: 40px;
+            padding-right: 5px;
+            margin-right: 15px;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="nav-container">
+        <div class="logo">M&gourmet</div>
+        <ul class="nav-links">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#produtos">Doces</a></li>
+            <li><a href="#produtos-salgados">Salgados</a></li>
+            <li><a href="#depoimentos">Experiência</a></li>
+            <li><a id="meuLink" href="https://api.whatsapp.com/send/?phone=5511946263189&text&type=phone_number&app_absent=0&utm_source=ig" target="_blank" rel="external"><img src="whatsapp.png" alt="whatsapp"></a></li>
+        </ul>
+        
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Uma experiência de sabor inesquecível</h1>
+            <p>Trabalhamos com pronta entrega & encomenda para aniversário, casamento, chá de bebê, batizado e o que vocês quiserem comemorar.</p>
+            <a href="#produtos" class="btn">Explorar Menu <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Produtos (estáticos, exibidos com HTML puro) -->
+    <section id="produtos" class="products-section">
+        <div class="container">
+            <div class="title-wrapper">
+                <h2 class="section-title">Nossos Doces Especiais</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Produto 1 -->
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(t-dark.jpeg);"> 
+                        
+                    </div>
+                    <div class="product-info">
+                        <h3>Torta Cookie Dark</h3>
+                        <div class="price"></div>
+                        <div>Recheada com chocolate branco</div>
+                    </div>
+                </div>
+                <!-- Produto 2 -->
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(t-maracuja.jpeg);">
+                        
+                    </div>
+                    <div class="product-info">
+                        <h3>Bolo de Maracujá Dark</h3>
+                        <div class="price"></div>
+                        <div>Massa de cacau black com brigadeiro de maracujá e finalizado com brigadeiro meio amargo </div> 
+                    </div>
+                </div>
+                <!-- Produto 3 -->
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(b-prestigio.jpeg);">
+                       
+                    </div>
+                    <div class="product-info">
+                        <h3>Bolo de prestigio</h3>
+                        <div class="price"></div>
+                        <div>Recheado de brigadeiro de coco cremoso e brigadeiro e ganache meio amargo, finalizado com brigadeiro meio amargo e coco ralada </div>
+                    </div>
+                </div>
+                <!-- Produto 4 -->
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(b-matilda.jpeg);">
+                        
+                    </div>
+                    <div class="product-info">
+                        <h3>Bolo Matilda</h3>
+                        <div class="price"></div>
+                        <div>Massa de cacau black recheado e finalizado com ganache de chocolate </div>
+                    </div>
+                </div>
+                <!-- Produto 5 -->
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(t-cookie.jpeg);">
+                        
+                    </div>
+                    <div class="product-info">
+                        <h3>Torta Cookie Tradicional</h3>
+                        <div class="price"></div>
+                        <div>Recheada com nutella </div>
+                    </div>
+                </div>
+                <!-- Produto 6 -->
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(b-morango.jpeg);">
+                       
+                    </div>
+                    <div class="product-info">
+                        <h3>Bolo de Morango</h3>
+                        <div class="price"></div>
+                        <div>Recheado com nata e morangos frescos e finalizado com chantilly e suspiros </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(brownie-s.jpeg);">
+                      
+                    </div>
+                    <div class="product-info">
+                        <h3>Fatia Brownie Supreme</h3>
+                        <div class="price"></div>
+                        <div>Brownie com creme de ninho, nuttela e morango</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="produtos-salgados" class="products-section">
+        <div class="container">
+
+            <div class="title-wrapper">
+                <h2 class="section-title">Nossos Salgados Especiais</h2>
+            </div>
+
+            <div class="products-grid">
+
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(coxinha.jpeg);"> 
+                        
+                    </div>
+                    <div class="product-info">
+                        <h3>Coxinha de frango</h3>
+                        <div class="price"></div>
+                        <div>Rechada com frango e cream cheese</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url(coxinha.jpeg);"> 
+                        
+                    </div>
+                    <div class="product-info">
+                        <h3>Coxinha de costela</h3>
+                        <div class="price"></div>
+                        <div>Rechada com costela e cream cheese</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Depoimentos estáticos (sem carrossel ativo) -->
+    <section id="depoimentos" class="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 2rem;">O que nossos clientes dizem</h2>
+            <div class="carousel">
+                <div class="testimonial-text" id="testimonialText">"Os melhores brownies que já provei! Textura perfeita e sabor intenso de chocolate. Recomendo demais!"</div>
+                <div class="testimonial-author">— Mariana S.</div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevTestBtn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn" id="nextTestBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <!-- Nota: carrossel estático, apenas visual -->
+        </div>
+    </section>
+
+
+</main>
+
+<footer>
+    <p>© 2026 M&gourmet - Confeitaria Artesanal • Sabores que encantam • Feito com amor e os melhores igredientes</p>
+    <p style="margin-top: 8px;"><i class="fas fa-cookie-bite"></i> Entrega para toda São Paulo-SP</p>
+</footer>
+
+<!-- Sidebar do carrinho (permanece oculta, não funcional) -->
+<div class="overlay" id="overlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h2><i class="fas fa-shopping-bag"></i> Seu Carrinho</h2>
+        <button class="close-cart" disabled>&times;</button>
+    </div>
+    <div class="cart-items" id="cartItemsContainer">
+        <div style="text-align:center; padding: 2rem;">Carrinho vazio 🍪</div>
+    </div>
+    <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotalPrice">R$ 0,00</span>
+    </div>
+    <button class="checkout-btn" disabled>Finalizar Pedido <i class="fas fa-heart"></i></button>
+</div>
+
+<!-- Nenhum JavaScript incluso — site estático e apenas visual -->
+
+
+<script>
+
+// Array de depoimentos
+const testimonials = [
+    {
+        text: "Os melhores brownies que já provei! Textura perfeita e sabor intenso de chocolate. Recomendo demais!",
+        author: "Mariana S."
+    },
+    {
+        text: "Peça perfeita para presentear! Além de lindos, os brownies são deliciosos. Minha família toda amou!",
+        author: "Carlos Eduardo"
+    },
+    {
+        text: "Sou cliente fiel há mais de um ano. A qualidade é sempre consistente e o atendimento é nota 1000!",
+        author: "Ana Beatriz"
+    },
+    {
+        text: "Brownie artesanal de verdade! Dá pra sentir o carinho em cada mordida. Já virei cliente fiel.",
+        author: "Pedro Henrique"
+    },
+    {
+        text: "Encomendei para uma festa e foi sucesso total! Todos perguntaram onde comprei. Super recomendo!",
+        author: "Juliana Costa"
+    }
+];
+
+let currentTestimonial = 0;
+
+// Pegar elementos do DOM
+const testimonialText = document.getElementById('testimonialText');
+const testimonialAuthor = document.querySelector('.testimonial-author');
+const prevBtn = document.getElementById('prevTestBtn');
+const nextBtn = document.getElementById('nextTestBtn');
+
+// Função para atualizar o depoimento exibido
+function updateTestimonial(index) {
+    // Adicionar classe para animação de fade
+    testimonialText.style.opacity = '0';
+    testimonialAuthor.style.opacity = '0';
+    
+    setTimeout(() => {
+        testimonialText.textContent = `"${testimonials[index].text}"`;
+        testimonialAuthor.textContent = `— ${testimonials[index].author}`;
+        testimonialText.style.opacity = '1';
+        testimonialAuthor.style.opacity = '1';
+    }, 200);
+    
+    // Atualizar estado dos botões
+    prevBtn.disabled = (index === 0);
+    nextBtn.disabled = (index === testimonials.length - 1);
+}
+
+// Event listener para botão próximo
+nextBtn.addEventListener('click', () => {
+    if (currentTestimonial < testimonials.length - 1) {
+        currentTestimonial++;
+        updateTestimonial(currentTestimonial);
+    }
+});
+
+// Event listener para botão anterior
+prevBtn.addEventListener('click', () => {
+    if (currentTestimonial > 0) {
+        currentTestimonial--;
+        updateTestimonial(currentTestimonial);
+    }
+});
+
+// Adicionar estilos CSS para transição suave
+const style = document.createElement('style');
+style.textContent = `
+    .testimonial-text, .testimonial-author {
+        transition: opacity 0.2s ease-in-out;
+    }
+    
+    .carousel-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    .carousel-btn:not(:disabled):hover {
+        background-color: #5c3d2e;
+        transform: scale(1.1);
+    }
+`;
+document.head.appendChild(style);
+
+</script>
+
+
+<script>
+    const telefone = '5511946263189';
+    const mensagem = 'Olá, gostaria de fazer uma encomenda.';
+    const link = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+    
+    document.getElementById('meuLink').href = link;
+</script>
+
+</body>
+</html>
